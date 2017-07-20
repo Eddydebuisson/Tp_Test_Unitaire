@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 import java.util.Scanner;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
@@ -40,7 +39,6 @@ public class AppTest {
 		this.app = new App(sc, calculService);
 	}
 
-	@Ignore
 	@Test
 	public void testAfficherTitre() throws Exception {
 		this.app.afficherTitre();
@@ -48,7 +46,6 @@ public class AppTest {
 		assertThat(logConsole).contains("**** Application Calculatrice ****");
 	}
 
-	@Ignore
 	@Test
 	public void testEvaluer() throws Exception {
 		LOG.info("Etant donné, un service CalculService qui retourne 35 à l'évaluation de l'expression 1+34");
@@ -63,30 +60,15 @@ public class AppTest {
 
 	}
 
-	// @Test
-	// public void testEvalue555r() throws Exception {
-	// when(calculService.additionner("2+2")).thenReturn(44444);
-	// when(calculService.additionner("1+34")).thenReturn(555);
-	//
-	// this.app.evaluer("1+34");
-	//
-	// verify(calculService).additionner("1+34");
-	//
-	// }
-	@Ignore
 	@Test
 	public void testEvaluerException() throws Exception {
 		String expression = "aze";
 		when(calculService.additionner(expression)).thenThrow(new CalculException());
-		// exceptionlevee.expect(CalculException.class);
-		// exceptionlevee.expectMessage("L'expression " + expression + " est
-		// invalide");
 		this.app.evaluer(expression);
 		verify(calculService).additionner(expression);
 		assertThat(systemOutRule.getLog()).contains("L'expression " + expression + " est invalide");
 	}
 
-	@Ignore
 	@Test
 	public void testAurevoir() throws Exception {
 		systemInMock.provideLines("fin");
